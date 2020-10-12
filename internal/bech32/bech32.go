@@ -55,7 +55,7 @@ func ConvertAndEncode(hrp string, data []byte) (string, error) {
 // Decode bech32 encoded string, returning the human-readable
 // part and the data part excluding the checksum.
 func Decode(bech string) (string, []uint5, error) {
-	if len(bech) < encodedStringMinLength /*|| len(bech) > encodedStringMaxLength*/ {
+	if len(bech) < encodedStringMinLength {
 		return "", nil, fmt.Errorf("invalid bech32 string length %d", len(bech))
 	}
 
@@ -129,10 +129,10 @@ func Encode(hrp string, data []uint5) (string, error) {
 	// represented using the specified charset.
 	dataChars, err := toChars(combined)
 	if err != nil {
-		return "", fmt.Errorf("unable to convert data bytes to chars: "+
-			"%v", err)
+		return "", fmt.Errorf("unable to convert data bytes to chars: %v", err)
 	}
-	return hrp + "1" + dataChars, nil
+
+	return hrp + string(separatorChar) + dataChars, nil
 }
 
 // toBytes converts each character in the string 'chars' to the value of the
@@ -242,6 +242,7 @@ func createChecksum(hrp string, data []uint5) []uint5 {
 	for i := 0; i < 6; i++ {
 		checksum[i] = uint5((mod >> (5 * (5 - uint32(i))))) & 31
 	}
+
 	return checksum
 }
 
