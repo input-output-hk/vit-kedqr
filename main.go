@@ -106,7 +106,7 @@ func main() {
 	}
 
 	if *output != "" {
-		err = qrc.WriteFile(-2, *output) // write to outfut file
+		err = qrc.WriteFile(256, *output) // write to outfut file
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "%s: error, %s\n", "qrc.WriteFile", err.Error())
 			fmt.Printf("\n%s\n", qrc.ToSmallString(false)) // output to console if write to file fails
