@@ -16,12 +16,6 @@ import (
 	"github.com/skip2/go-qrcode"
 )
 
-/*
-jcli key to-bytes
-ed25519e_sk14rwkgpmmg5s29e4k8m4mny324lj4rv8x9tqg0tn5khlfqzgjt9ftj90u642j2skwraddf2qd88eqv8wv3a463mshgmz9dxtvthjswgqvcdwty
-a8dd64077b4520a2e6b63eebb9922aafe551b0e62ac087ae74b5fe9009125952b915fcd5552542ce1f5ad4a80d39f2061dcc8f6ba8ee1746c456996c5de50720
-*/
-
 const (
 	PIN_LENGTH = 4             // 4-digit numer
 	KEY_HRP    = "ed25519e_sk" // bech32 hrp of ed25519extended secret key
@@ -36,7 +30,7 @@ func main() {
 	)
 	flag.Parse()
 
-	/* PIN/PASSWORD check*/
+	/* PIN/PASSWORD check */
 	password := []byte(strings.TrimSpace(*pin))
 	if len(password) != PIN_LENGTH {
 		fmt.Fprintf(os.Stderr, "%s: needs %d digits, bud %d provided\n", "pin", PIN_LENGTH, len(password))
@@ -105,8 +99,9 @@ func main() {
 		os.Exit(1)
 	}
 
+	// write to output file if provided
 	if *output != "" {
-		err = qrc.WriteFile(256, *output) // write to outfut file
+		err = qrc.WriteFile(256, *output)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "%s: error, %s\n", "qrc.WriteFile", err.Error())
 			fmt.Printf("\n%s\n", qrc.ToSmallString(false)) // output to console if write to file fails
@@ -114,7 +109,8 @@ func main() {
 	} else {
 		fmt.Printf("\n%s\n", qrc.ToSmallString(false)) // output to console in no output provided
 	}
-	/* we are done and all the data are outputed */
+
+	/***** we are done and all the data are outputed *****/
 
 	/*********************************************************************/
 	/* Perform some reverse checks, encoded data -> original bech32, jic */
