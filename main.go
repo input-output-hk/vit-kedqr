@@ -11,8 +11,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/input-output-hk/vit_ked_qr/internal/bech32"
-	"github.com/input-output-hk/vit_ked_qr/internal/ked"
+	"github.com/input-output-hk/vit-kedqr/internal/bech32"
+	"github.com/input-output-hk/vit-kedqr/internal/ked"
 	"github.com/skip2/go-qrcode"
 )
 

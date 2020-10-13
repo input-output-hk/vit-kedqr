@@ -1,4 +1,4 @@
-module github.com/input-output-hk/vit_ked_qr
+module github.com/input-output-hk/vit-kedqr
 
 go 1.15
 
