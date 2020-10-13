@@ -33,7 +33,7 @@ func main() {
 	/* PIN/PASSWORD check */
 	password := []byte(strings.TrimSpace(*pin))
 	if len(password) != PIN_LENGTH {
-		fmt.Fprintf(os.Stderr, "%s: needs %d digits, bud %d provided\n", "pin", PIN_LENGTH, len(password))
+		fmt.Fprintf(os.Stderr, "%s: needs %d digits, but %d provided\n", "pin", PIN_LENGTH, len(password))
 		os.Exit(1)
 	}
 	// convert pin/password digits from string to int value
