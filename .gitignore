@@ -15,3 +15,6 @@
 *.png
 *.jpg
 *.sk
+
+# nix
+result*
