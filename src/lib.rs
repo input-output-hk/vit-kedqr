@@ -122,7 +122,6 @@ mod tests {
     // TODO: Improve into an integration test using a temporary directory.
     // Leaving here as an example.
     #[test]
-    #[ignore]
     fn generate_svg() {
         const PASSWORD: &[u8] = &[1, 2, 3, 4];
         let sk = SecretKey::generate(rand::thread_rng());
@@ -131,7 +130,6 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
     fn encode_decode() {
         const PASSWORD: &[u8] = &[1, 2, 3, 4];
         let sk = SecretKey::generate(rand::thread_rng());
