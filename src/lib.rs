@@ -4,6 +4,7 @@ use qrcode::{
     render::{svg, unicode},
     EcLevel, QrCode,
 };
+use std::fmt;
 use std::fs::File;
 use std::io::{self, prelude::*};
 use std::path::Path;
@@ -101,6 +102,19 @@ impl KeyQrCode {
                 Ok(SecretKey::from_binary(&key)?)
             })
             .collect()
+    }
+}
+
+impl fmt::Display for KeyQrCode {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let qr_img = self
+            .inner
+            .render::<unicode::Dense1x2>()
+            .quiet_zone(true)
+            .dark_color(unicode::Dense1x2::Light)
+            .light_color(unicode::Dense1x2::Dark)
+            .build();
+        write!(f, "{}", qr_img)
     }
 }
 
