@@ -68,14 +68,18 @@ impl QRcodeApp {
         // process output
         match output {
             Some(path) => {
+                // save qr code to file, or print to stdout if it fails
                 let img = qr.to_img();
-                img.save(path).unwrap();
+                if let Err(e) = img.save(path) {
+                    println!("Error: {}", e);
+                    println!();
+                    println!("{}", qr);
+                }
             }
             None => {
-                // FIXME:
-                // to match functionality with the go version,
-                // when no path is given, the output is printed
-                // to stdout.
+                // prints qr code to stdout when no path is specified
+                println!();
+                println!("{}", qr);
             }
         }
         Ok(())
