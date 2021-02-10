@@ -6,7 +6,7 @@ Used/needed for Catalyst project.
 ## Installation
 - Download the latest release from releases page [https://github.com/input-output-hk/vit-kedqr/releases](https://github.com/input-output-hk/vit-kedqr/releases)
 - or if you have [Rust](https://www.rust-lang.org/learn/get-started) installed use: `cargo install --git github.com/input-output-hk/vit-kedqr`
-  - if you want to build from the source use ie: `cargo build`
+  - if you want to build from the source use ie: `cargo build --bin vit-kedqr`
 
 ### Usage
 
