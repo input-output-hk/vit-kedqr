@@ -65,7 +65,8 @@ impl QRcodeApp {
         // process output
         match output {
             Some(path) => {
-                qr.write_svg(path).unwrap();
+                let img = qr.to_img();
+                img.save(path).unwrap();
             }
             None => {
                 // FIXME:
