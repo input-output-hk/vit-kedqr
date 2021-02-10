@@ -11,9 +11,6 @@ use std::path::Path;
 use symmetric_cipher::{decrypt, encrypt, Error as SymmetricCipherError};
 use thiserror::Error;
 
-const MODULE_SIZE: i32 = 8;
-const QR_CODE_BORDER: i32 = 4 * 8;
-
 pub struct KeyQrCode {
     inner: QrCode,
 }
