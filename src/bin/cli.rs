@@ -1,6 +1,5 @@
 use chain_crypto::bech32::Bech32;
 use chain_crypto::{Ed25519Extended, SecretKey};
-use vit_kedqr::KeyQrCode;
 use std::{
     convert::From,
     error::Error,
@@ -12,25 +11,26 @@ use std::{
     str::FromStr,
 };
 use structopt::StructOpt;
+use vit_kedqr::KeyQrCode;
 
 /// QCode CLI toolkit
 #[derive(Debug, PartialEq, StructOpt)]
 #[structopt(rename_all = "kebab-case")]
 pub struct QRcodeApp {
     #[structopt(
-        long = "input",
+        short, long,
         parse(from_os_str),
         about = "path to file containing ed25519extended bech32 value"
     )]
     input: PathBuf,
     #[structopt(
-        long = "output",
+        short, long,
         parse(from_os_str),
         about = "path to file to save qr code output, if not provided console output will be attempted"
     )]
     output: Option<PathBuf>,
     #[structopt(
-        long = "pin",
+        short, long,
         parse(try_from_str),
         about = "Pin code. 4-digit number is used on Catalyst"
     )]
@@ -63,8 +63,6 @@ impl QRcodeApp {
         // generate qrcode with key and parsed pin
         let qr = KeyQrCode::generate(secret_key.clone(), &[pwd.0, pwd.1, pwd.2, pwd.3]);
         // process output
-        // EVERYTHING IS WORKING UP TIL HERE
-        // TODO: process output file to path when given, output to stdout when path is None.
         match output {
             Some(path) => {
                 qr.write_svg(path).unwrap();
