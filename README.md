@@ -15,8 +15,8 @@ Used/needed for Catalyst project.
 and you will get a new file `test-key.sk` containing the bech32 encoded key, ie: `ed25519e_sk14rwkgpmmg5s29e4k8m4mny324lj4rv8x9tqg0tn5khlfqzgjt9ftj90u642j2skwraddf2qd88eqv8wv3a463mshgmz9dxtvthjswgqvcdwty`
 
 2. Use `vit-kedqr` binary to build your encrypted qr code with your provided pin code (4-digit number is expected for now)
-- `vit-kedqr -input=test-key.sk -pin=1234 -output=qr-test-key.png` will output the qr code on the provided .png file **qr-test-key.png**.
-- `vit-kedqr -input=test-key.sk -pin=1234` will do the same as the previous command, but insted of file the output will be printed out on the console ie:
+- `vit-kedqr --input=test-key.sk --pin=1234 --output=qr-test-key.png` will output the qr code on the provided .png file **qr-test-key.png**.
+- `vit-kedqr --input=test-key.sk --pin=1234` will do the same as the previous command, but insted of file the output will be printed out on the console ie:
 ```
 
 █████████████████████████████████████████████████████████████████████

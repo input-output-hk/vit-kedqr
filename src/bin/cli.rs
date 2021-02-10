@@ -18,19 +18,22 @@ use vit_kedqr::KeyQrCode;
 #[structopt(rename_all = "kebab-case")]
 pub struct QRcodeApp {
     #[structopt(
-        short, long,
+        short,
+        long,
         parse(from_os_str),
         about = "path to file containing ed25519extended bech32 value"
     )]
     input: PathBuf,
     #[structopt(
-        short, long,
+        short,
+        long,
         parse(from_os_str),
         about = "path to file to save qr code output, if not provided console output will be attempted"
     )]
     output: Option<PathBuf>,
     #[structopt(
-        short, long,
+        short,
+        long,
         parse(try_from_str),
         about = "Pin code. 4-digit number is used on Catalyst"
     )]
