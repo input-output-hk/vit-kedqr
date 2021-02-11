@@ -17,25 +17,25 @@ use vit_kedqr::KeyQrCode;
 #[derive(Debug, PartialEq, StructOpt)]
 #[structopt(rename_all = "kebab-case")]
 pub struct QRcodeApp {
+    /// Path to file containing ed25519extended bech32 value.
     #[structopt(
         short,
         long,
         parse(from_os_str),
-        about = "path to file containing ed25519extended bech32 value"
     )]
     input: PathBuf,
+    /// Path to file to save qr code output, if not provided console output will be attempted.
     #[structopt(
         short,
         long,
         parse(from_os_str),
-        about = "path to file to save qr code output, if not provided console output will be attempted"
     )]
     output: Option<PathBuf>,
+    /// Pin code. 4-digit number is used on Catalyst.
     #[structopt(
         short,
         long,
         parse(try_from_str),
-        about = "Pin code. 4-digit number is used on Catalyst"
     )]
     pin: QRPin,
 }

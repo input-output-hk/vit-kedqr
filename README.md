@@ -71,9 +71,9 @@ FLAGS:
     -V, --version    Prints version information
 
 OPTIONS:
-    -i, --input <input>
-    -o, --output <output>
-    -p, --pin <pin>
+    -i, --input <input>      Path to file containing ed25519extended bech32 value
+    -o, --output <output>    Path to file to save qr code output, if not provided console output will be attempted
+    -p, --pin <pin>          Pin code. 4-digit number is used on Catalyst
 ```
 
 #### Warning
