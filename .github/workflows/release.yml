@@ -212,7 +212,6 @@ jobs:
           args: >
             --manifest-path ./Cargo.toml
             --verbose
-            --locked
             --release
             --target ${{ matrix.config.target }}
 
