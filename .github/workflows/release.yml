@@ -253,7 +253,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           hub release edit --draft=false \
-            -m 'Release ${{ needs.create_release.outputs.version }}' \
+            -m 'vit-kedqr v${{ needs.create_release.outputs.version }}' \
             ${{ needs.create_release.outputs.tag }}
 
   remove_failed_release:
