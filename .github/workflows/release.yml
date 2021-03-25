@@ -22,12 +22,6 @@ jobs:
         toolchain: [stable]
         cross: [false]
     steps:
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: ${{ matrix.toolchain }}
-          target: ${{ matrix.config.target }}
-          override: true
-          default: true
       - name: Checkout
         uses: actions/checkout@v2
 
