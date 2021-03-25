@@ -11,10 +11,26 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [x86_64-pc-windows-gnu, x86_64-unknown-linux-musl, x86_64-apple-darwin]
+        config:
+          # Linux
+          - { os: ubuntu-latest, target: x86_64-unknown-linux-gnu }
+          # Macos
+          - { os: macos-latest, target: x86_64-apple-darwin }
+          # Windows
+          - { os: windows-latest, target: x86_64-pc-windows-msvc }
+        target_cpu: [generic, broadwell]
+        toolchain: [stable]
+        cross: [false]
     steps:
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.toolchain }}
+          target: ${{ matrix.config.target }}
+          override: true
+          default: true
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Compile and release
         uses: Douile/rust-build.action@v0.1.26
         env:
