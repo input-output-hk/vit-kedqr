@@ -6,33 +6,25 @@
     rust-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = { self, nixpkgs, utils, rust-nix }:
-    let
-      workspaceCargo = builtins.fromTOML (builtins.readFile ./Cargo.toml);
-      inherit (workspaceCargo.workspace) members;
-    in utils.lib.simpleFlake {
+
+    utils.lib.simpleFlake rec {
       inherit nixpkgs;
       systems = [ "x86_64-linux" "aarch64-linux" ];
-      preOverlays = [ rust-nix ];
-      overlay = final: prev:
-        let lib = prev.lib;
-        in lib.listToAttrs (lib.forEach members (member:
-          lib.nameValuePair member (final.rust-nix.buildPackage {
+      preOverlays = [ rust-nix overlay ];
+      overlay = final: prev: {
+         vit-kedqr = prev.rust-nix.buildPackage {
             inherit ((builtins.fromTOML
-              (builtins.readFile (./. + "/${member}/Cargo.toml"))).package)
+              (builtins.readFile (./Cargo.toml))).package)
               name version;
             root = ./.;
-            nativeBuildInputs = with final; [ pkg-config protobuf rustfmt ];
-            buildInputs = with final; [ openssl ];
-            PROTOC = "${final.protobuf}/bin/protoc";
-            PROTOC_INCLUDE = "${final.protobuf}/include";
-          })));
-      packages = { vit-kedqr }@pkgs: pkgs;
-      devShell = { mkShell, rustc, cargo, pkg-config, openssl, protobuf }:
-        mkShell {
-          PROTOC = "${protobuf}/bin/protoc";
-          PROTOC_INCLUDE = "${protobuf}/include";
-          buildInputs = [ rustc cargo pkg-config openssl protobuf ];
-        };
+          };
+      };
+      packages =
+        { vit-kedqr }@pkgs:
+        pkgs;
+      devShell = { mkShell, rustc, cargo, pkg-config, openssl }: mkShell {
+        buildInputs = [ rustc cargo pkg-config openssl ];
+      };
     };
 }
 
